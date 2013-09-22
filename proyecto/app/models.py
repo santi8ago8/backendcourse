@@ -6,7 +6,7 @@ class Categoria(models.Model):
     titulo = models.CharField(max_length=140)
 
     def __unicode__(self):
-        return "%s - posts: %s" % (self.titulo, len(Enlace.objects.filter(categoria=self)))
+        return self.titulo
 
 
 class Enlace(models.Model):
@@ -19,3 +19,11 @@ class Enlace(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.titulo, self.votos)
+
+    def mis_votos_en_imagen_rosada(self):
+        return 'http://localhost:8000'
+
+    def es_popular(self):
+        return self.votos > 10
+
+    es_popular.boolean = True

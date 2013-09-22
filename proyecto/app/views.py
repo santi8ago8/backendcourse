@@ -5,7 +5,7 @@ from django.template.loader import get_template
 from django.template import Context
 from datetime import datetime
 from models import *
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.shortcuts import get_object_or_404
 from forms import *
 from django.template.context import RequestContext
@@ -22,14 +22,14 @@ def hora_actual(request):
     return HttpResponse(html)
     '''
     now = datetime.now()
-    return render_to_response("hora.html", {'hora': now})
+    return render(request, "hora.html", {'hora': now})
 
 
 def home(request):
     categorias = Categoria.objects.all()
     enlaces = Enlace.objects.order_by('-votos').all()
     template = 'index.html'
-    return render_to_response(template, locals())
+    return render(request, template, locals())
 
 
 @login_required
